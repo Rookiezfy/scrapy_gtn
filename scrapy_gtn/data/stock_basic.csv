@@ -814,7 +814,7 @@ ts_code,symbol,name,area,industry,fullname,enname,market,exchange,curr_type,list
 002357.SZ,002357,富临运业,四川,公路,四川富临运业集团股份有限公司,"Sichuan Fulin Transportation Group Co.,Ltd.",中小板,SZSE,CNY,L,20100210,,N
 002358.SZ,002358,森源电气,河南,电气设备,河南森源电气股份有限公司,"Henan Senyuan Electric Co.,Ltd.",中小板,SZSE,CNY,L,20100210,,S
 002359.SZ,002359,*ST北讯,深圳,通信设备,北讯集团股份有限公司,"Northcom Group Co., Ltd.",中小板,SZSE,CNY,L,20100210,,N
-002360.SZ,002360,同德化工,山西,化工原料,山西同德化工股份有限公司,"Shanxi Tond Chemical Co.,Ltd",中小板,SZSE,CNY,L,20100303,,N
+002360.SZ,002360,同德化工,山西,化工原料,山西同德化工股份有限公司,"Shanxi Tond Chemical Co.,Ltd.",中小板,SZSE,CNY,L,20100303,,N
 002361.SZ,002361,神剑股份,安徽,化工原料,安徽神剑新材料股份有限公司,"Anhui Shenjian New Materials Co.,Ltd.",中小板,SZSE,CNY,L,20100303,,N
 002362.SZ,002362,汉王科技,北京,电脑设备,汉王科技股份有限公司,"Hanwang Technology Co.,Ltd.",中小板,SZSE,CNY,L,20100303,,N
 002363.SZ,002363,隆基机械,山东,汽车配件,山东隆基机械股份有限公司,"Shandong Longji Machinery Co., Ltd.",中小板,SZSE,CNY,L,20100305,,N
@@ -1387,7 +1387,7 @@ ts_code,symbol,name,area,industry,fullname,enname,market,exchange,curr_type,list
 002953.SZ,002953,日丰股份,广东,电气设备,广东日丰电缆股份有限公司,"Guangdong Rifeng Electric Cable Co., Ltd.",中小板,SZSE,CNY,L,20190509,,N
 002955.SZ,002955,鸿合科技,北京,电脑设备,鸿合科技股份有限公司,"Hitevision Co., Ltd.",中小板,SZSE,CNY,L,20190523,,N
 002956.SZ,002956,西麦食品,广西,食品,桂林西麦食品股份有限公司,"GUILIN SEAMILD FOODS CO.,LTD",中小板,SZSE,CNY,L,20190619,,N
-002957.SZ,002957,N科瑞,深圳,专用机械,深圳科瑞技术股份有限公司,"Shenzhen Colibri Technologies Co.,Ltd.",中小板,SZSE,CNY,L,20190726,,N
+002957.SZ,002957,科瑞技术,深圳,专用机械,深圳科瑞技术股份有限公司,"Shenzhen Colibri Technologies Co.,Ltd.",中小板,SZSE,CNY,L,20190726,,N
 002958.SZ,002958,青农商行,山东,银行,青岛农村商业银行股份有限公司,Qingdao Rural Commercial Bank Corporation,中小板,SZSE,CNY,L,20190326,,N
 300001.SZ,300001,特锐德,山东,电气设备,青岛特锐德电气股份有限公司,"Qingdao TGOOD Electric Co., Ltd.",创业板,SZSE,CNY,L,20091030,,S
 300002.SZ,300002,神州泰岳,北京,软件服务,北京神州泰岳软件股份有限公司,"Beijing Ultrapower Software Co.,Ltd",创业板,SZSE,CNY,L,20091030,,S
@@ -3129,7 +3129,7 @@ ts_code,symbol,name,area,industry,fullname,enname,market,exchange,curr_type,list
 601899.SH,601899,紫金矿业,福建,黄金,紫金矿业集团股份有限公司,Zijin Mining Group Company Limited,主板,SSE,CNY,L,20080425,,H
 601900.SH,601900,南方传媒,广东,出版业,南方出版传媒股份有限公司,"Southern Publishing and Media Co.,Ltd.",主板,SSE,CNY,L,20160215,,N
 601901.SH,601901,方正证券,湖南,证券,方正证券股份有限公司,"Founder Securities Co.,Ltd.",主板,SSE,CNY,L,20110810,,H
-601908.SH,601908,京运通,北京,电气设备,北京京运通科技股份有限公司,"Beijing Jingyuntong Technology Co., Ltd.",主板,SSE,CNY,L,20110908,,H
+601908.SH,601908,京运通,北京,新型电力,北京京运通科技股份有限公司,"Beijing Jingyuntong Technology Co., Ltd.",主板,SSE,CNY,L,20110908,,H
 601918.SH,601918,新集能源,安徽,煤炭开采,中煤新集能源股份有限公司,"China Coal Xinji Energy Co.,Ltd",主板,SSE,CNY,L,20071219,,N
 601919.SH,601919,中远海控,天津,水运,中远海运控股股份有限公司,"COSCO SHIPPING HoldingsCo., Ltd.",主板,SSE,CNY,L,20070626,,H
 601928.SH,601928,凤凰传媒,江苏,出版业,江苏凤凰出版传媒股份有限公司,Jiangsu Phoenix Publishing&Media Corporation Limited,主板,SSE,CNY,L,20111130,,N
@@ -3433,6 +3433,7 @@ ts_code,symbol,name,area,industry,fullname,enname,market,exchange,curr_type,list
 603609.SH,603609,禾丰牧业,辽宁,饲料,辽宁禾丰牧业股份有限公司,"Liaoning Wellhope Agri-Tech Joint Stock Co., Ltd.",主板,SSE,CNY,L,20140808,,H
 603611.SH,603611,诺力股份,浙江,运输设备,诺力智能装备股份有限公司,"Noblelift Intelligent Equipment Co.,Ltd.",主板,SSE,CNY,L,20150128,,N
 603612.SH,603612,索通发展,山东,矿物制品,索通发展股份有限公司,"Sunstone Development Co., Ltd.",主板,SSE,CNY,L,20170718,,H
+603613.SH,603613,N国联,北京,互联网,北京国联视讯信息技术股份有限公司,"Beijing United Information Technology Co.,Ltd.",主板,SSE,CNY,L,20190730,,N
 603615.SH,603615,茶花股份,福建,家居用品,茶花现代家居用品股份有限公司,"Chahua Modern Housewares Co.,Ltd.",主板,SSE,CNY,L,20170213,,N
 603616.SH,603616,韩建河山,北京,其他建材,北京韩建河山管业股份有限公司,"Beijing Hanjian Heshan Pipeline Co.,Ltd.",主板,SSE,CNY,L,20150611,,N
 603617.SH,603617,君禾股份,浙江,专用机械,君禾泵业股份有限公司,"Junhe Pumps Holding Co., Ltd",主板,SSE,CNY,L,20170703,,N
@@ -3471,7 +3472,7 @@ ts_code,symbol,name,area,industry,fullname,enname,market,exchange,curr_type,list
 603683.SH,603683,晶华新材,上海,化工原料,上海晶华胶粘新材料股份有限公司,"Shanghai Smith Adhesive New Material Co., Ltd",主板,SSE,CNY,L,20171020,,N
 603685.SH,603685,晨丰科技,浙江,电气设备,浙江晨丰科技股份有限公司,"Zhejiang Chenfeng Technology Co., Ltd.",主板,SSE,CNY,L,20171127,,N
 603686.SH,603686,龙马环卫,福建,环境保护,福建龙马环卫装备股份有限公司,"Fujian Longma Environmental Sanitation Equipment Co., Ltd.",主板,SSE,CNY,L,20150126,,H
-603687.SH,603687,N大胜达,浙江,广告包装,浙江大胜达包装股份有限公司,"Zhejiang Great Shengda Packaging Co.,Ltd.",主板,SSE,CNY,L,20190726,,N
+603687.SH,603687,大胜达,浙江,广告包装,浙江大胜达包装股份有限公司,"Zhejiang Great Shengda Packaging Co.,Ltd.",主板,SSE,CNY,L,20190726,,N
 603688.SH,603688,石英股份,江苏,矿物制品,江苏太平洋石英股份有限公司,"Jiangsu Pacific Quartz Co.,Ltd",主板,SSE,CNY,L,20141031,,N
 603689.SH,603689,皖天然气,安徽,供气供热,安徽省天然气开发股份有限公司,"Anhui Province Natural Gas Development Co.,Ltd.",主板,SSE,CNY,L,20170110,,N
 603690.SH,603690,至纯科技,上海,专用机械,上海至纯洁净系统科技股份有限公司,"Pnc Process Systems Co., Ltd.",主板,SSE,CNY,L,20170113,,N
