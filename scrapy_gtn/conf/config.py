@@ -11,15 +11,11 @@ class GlobalVar:
     # 日志时间格式
     log_datefmt = '%Y-%m-%d %H:%M:%S'
 
-    # 日志文件存放路径
-    log_dir = '/scrapy_gtn/log/'
-
 def get_token():
     return GlobalVar.ts_token
 def get_data_dir():
     return GlobalVar.data_dir
-def get_log_dir():
-    return GlobalVar.log_dir
+
 def get_log_format():
     return GlobalVar.log_format
 def get_log_datefmt():

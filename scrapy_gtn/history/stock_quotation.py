@@ -14,7 +14,7 @@ import datetime
 from dateutil.parser import parse
 
 log.basicConfig(level=log.INFO,format=config.get_log_format(),datefmt=config.get_log_datefmt(),
-                handlers={log.FileHandler(filename=root_dir + config.get_log_dir() + 'stock_quotation.log', mode='a', encoding='utf-8'),
+                handlers={log.FileHandler(filename=root_dir + '/stock_quotation.log', mode='a', encoding='utf-8'),
                           log.StreamHandler(sys.stderr)})
 
 # 获取所有沪深股票的日、周、月以及分时数据
