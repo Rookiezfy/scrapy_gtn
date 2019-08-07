@@ -57,7 +57,6 @@ for freq in ['D','W','M']:
         res = res.append(df, ignore_index=True)
         log.info('获取---' + str(ts_code) + '---' + freq + '---数据结束')
         time.sleep(0.5)
-        break
     res = res[cols1]
     res.to_csv(root_dir + config.get_data_dir() + 'stock_'+freq+'.csv', index=False,sep=',')
 
@@ -78,6 +77,5 @@ for freq in ['1MIN','5MIN','15MIN','30MIN','60MIN']:
             time.sleep(15)
         log.info('获取---' + str(ts_code) + '---' + freq + '---数据结束')
         time.sleep(15)
-        break
     res = res[cols2]
     res.to_csv(root_dir + config.get_data_dir() + 'stock_'+freq+'.csv', index=False,sep=',')
