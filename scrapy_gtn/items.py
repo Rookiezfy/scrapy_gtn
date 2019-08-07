@@ -19,3 +19,10 @@ class ScrapyGtnItem(scrapy.Item):
     datetime = Field()
     original = Field()
     author = Field()
+
+# 港股股票信息
+class HkStockItem(scrapy.Item):
+    secid = Field() # 股票代码 市场代码+编号 116.19457
+    code = Field() #代码
+    name = Field() #名称
+    market = Field() #市场代码

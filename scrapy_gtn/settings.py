@@ -76,9 +76,9 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 # 值越小,优先级越高,优先级越高,越先执行
-#ITEM_PIPELINES = {
-#    'scrapy_gtn.pipelines.ScrapyGtnPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'scrapy_gtn.pipelines.HkStockPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
