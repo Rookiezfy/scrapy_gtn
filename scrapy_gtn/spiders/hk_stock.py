@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# scrapy crawl hk_stock -o hk_stock.csv
 import sys
 import os
 # 临时修改环境变量 为当前目录上两级目录
@@ -16,7 +17,6 @@ log.basicConfig(level=log.INFO,format=config.get_log_format(),datefmt=config.get
 
 class HkStockSpider(scrapy.Spider):
     name = 'hk_stock'
-
 
     def start_requests(self):
         start_url = 'http://52.push2.eastmoney.com/api/qt/clist/get/'
