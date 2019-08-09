@@ -39,8 +39,8 @@ class HkStockPipeline(object):
     # 执行具体的插入语句,不需要commit操作,Twisted会自动进行
     def do_insert(self,cursor,item):
         # 港股股票列表
-        if isinstance(item, items.HkStockItem):
-            sql = 'insert into hk_stock(secid,market,stock_code,stock_name) VALUES (%s,%s,%s,%s) on duplicate key update market = %s,stock_code = %s, stock_name = %s'
+        if isinstance(item, items.StockItem):
+            sql = 'insert into hk_hs_stock_list(secid,market,stock_code,stock_name) VALUES (%s,%s,%s,%s) on duplicate key update market = %s,stock_code = %s, stock_name = %s'
             lis = (item['secid'], item['market'], item['stock_code'], item['stock_name'],item['market'], item['stock_code'], item['stock_name'])
             cursor.execute(sql, lis)
 
