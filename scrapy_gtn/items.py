@@ -27,13 +27,14 @@ class HkStockItem(scrapy.Item):
 
 # 港股行情
 class HkQuotItem(scrapy.Item):
-    ts_code = Field() #股票代码
+    stock_code = Field() #股票代码
     trade_date = Field()  #交易日期
-    open = Field()  #开盘价
-    high = Field()  #最高价
-    low = Field()  #最低价
-    close = Field()  #收盘价
-    vol = Field()  #成交量
-    amount = Field()  #成交额(元)
+    open_px = Field()  #开盘价
+    high_px = Field()  #最高价
+    low_px = Field()  #最低价
+    close_px = Field()  #收盘价
+    business_amount = Field()  #成交量
+    business_balance = Field()  #成交额(元)
     freq = Field()  #频度
     secid =Field() #用于从接口查询的代码，市场代码.股票代码
+    market = Field() #市场代码

@@ -38,7 +38,7 @@ class HkStockSpider(scrapy.Spider):
             password=config.get_db_passwd(),
             charset=config.get_db_charset())
         cursor = connection.cursor()
-        cursor.execute('select secid,code,name from hk_stock')
+        cursor.execute('select secid,market,stock_code,stock_name from hk_stock')
         hk_stocks = cursor.fetchall()
 
         # k线频度 日 周 月
@@ -49,9 +49,10 @@ class HkStockSpider(scrapy.Spider):
 
         for freq in freqs:
             for hk_stock in hk_stocks:
-                log.info('正在爬取港股['+hk_stock[0]+hk_stock[2]+']频度'+freq+'k线数据...')
+                log.info('正在爬取港股['+hk_stock[0]+hk_stock[3]+']频度'+freq+'k线数据...')
                 meta = {'secid':hk_stock[0],
-                        'code': hk_stock[1],
+                        'market':hk_stock[1],
+                        'stock_code': hk_stock[2],
                         'klt': freq}
                 params = {'secid':hk_stock[0],
                           'fields1':'f1,f2,f3,f4,f5',
@@ -68,21 +69,23 @@ class HkStockSpider(scrapy.Spider):
         data = json.loads(response_str)['data']
         if (data != None):
            res = data['klines']
-           ts_code = response.meta['code']
+           market = response.meta['market']
+           stock_code = response.meta['stock_code']
            secid = response.meta['secid']
            freq = response.meta['klt']
            if (freq != '101'):
                res.pop()  # 去除最后一天的数据，防止日k 周k出现多余数据
            for one in res:
                item = HkQuotItem()
-               item['ts_code'] = ts_code
+               item['stock_code'] = stock_code
                item['trade_date'] = str(one).split(',')[0]
-               item['open'] = str(one).split(',')[1]
-               item['high'] = str(one).split(',')[3]
-               item['low'] = str(one).split(',')[4]
-               item['close'] = str(one).split(',')[2]
-               item['vol'] = str(one).split(',')[5]
-               item['amount'] = str(one).split(',')[6]
+               item['open_px'] = str(one).split(',')[1]
+               item['high_px'] = str(one).split(',')[3]
+               item['low_px'] = str(one).split(',')[4]
+               item['close_px'] = str(one).split(',')[2]
+               item['business_amount'] = str(one).split(',')[5]
+               item['business_balance'] = str(one).split(',')[6]
                item['freq'] = freq
                item['secid'] = secid
+               item['market'] = market
                yield item

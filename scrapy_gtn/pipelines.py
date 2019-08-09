@@ -14,6 +14,7 @@ from twisted.enterprise import adbapi
 import scrapy_gtn.conf.config as config
 import logging as log
 import scrapy_gtn.items as items
+import datetime
 
 # 异步机制将数据写入到mysql数据库中
 class HkStockPipeline(object):
@@ -56,10 +57,30 @@ class HkStockPipeline(object):
             if(item['freq'] == '103'):
                 table_name = 'hk_stock_monthly'
 
-            sql = 'insert into ' + table_name + '(ts_code,trade_date,open,high,low,close,vol,amount,secid) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)' \
-                  ' on duplicate key update open = %s,high = %s,low = %s,close = %s,vol = %s, amount = %s, secid = %s'
-            lis = (item['ts_code'], item['trade_date'],item['open'], item['high'], item['low'], item['close'], item['vol'], item['amount'],item['secid'],
-                   item['open'], item['high'], item['low'], item['close'], item['vol'], item['amount'],item['secid'])
+            sql = 'insert into ' + table_name + '(stock_code,' \
+                                                'trade_date,' \
+                                                'open_px,' \
+                                                'high_px,' \
+                                                'low_px,' \
+                                                'close_px,' \
+                                                'business_amount,' \
+                                                'business_balance,' \
+                                                'secid,' \
+                                                'market) VALUES ' \
+                                                '(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)' \
+                  ' on duplicate key update open_px = %s,' \
+                                                'high_px = %s,' \
+                                                'low_px = %s,' \
+                                                'close_px = %s,' \
+                                                'business_amount = %s,' \
+                                                'business_balance = %s,' \
+                                                'secid = %s,' \
+                                                'market = %s,' \
+                                                'last_upd_time = %s'
+            lis = (item['stock_code'], item['trade_date'],item['open_px'], item['high_px'], item['low_px'], item['close_px'], item['business_amount'],
+                   item['business_balance'],item['secid'],item['market'],
+                   item['open_px'], item['high_px'], item['low_px'], item['close_px'], item['business_amount'],
+                   item['business_balance'],item['secid'],item['market'],datetime.datetime.now())
             cursor.execute(sql, lis)
 
     def handle_error(self, failure):
