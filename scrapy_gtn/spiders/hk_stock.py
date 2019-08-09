@@ -40,7 +40,7 @@ class HkStockSpider(scrapy.Spider):
            for one in res:
                item = HkStockItem()
                item['secid'] = str(one['f13']) + '.' + str(one['f12'])
-               item['code'] = one['f12']
-               item['name'] = one['f14']
                item['market'] = one['f13']
+               item['stock_code'] = one['f12']
+               item['stock_name'] = one['f14']
                yield item

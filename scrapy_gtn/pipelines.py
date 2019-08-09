@@ -39,8 +39,8 @@ class HkStockPipeline(object):
     def do_insert(self,cursor,item):
         # 港股股票列表
         if isinstance(item, items.HkStockItem):
-            sql = 'insert into hk_stock(secid,code,name,market) VALUES (%s,%s,%s,%s) on duplicate key update code = %s,name = %s, market = %s'
-            lis = (item['secid'], item['code'], item['name'], item['market'],item['code'], item['name'], item['market'])
+            sql = 'insert into hk_stock(secid,market,stock_code,stock_name) VALUES (%s,%s,%s,%s) on duplicate key update market = %s,stock_code = %s, stock_name = %s'
+            lis = (item['secid'], item['market'], item['stock_code'], item['stock_name'],item['market'], item['stock_code'], item['stock_name'])
             cursor.execute(sql, lis)
 
         # 港股行情

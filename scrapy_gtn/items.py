@@ -21,9 +21,9 @@ class ScrapyGtnItem(scrapy.Item):
 # 港股股票信息
 class HkStockItem(scrapy.Item):
     secid = Field() # 股票代码 市场代码+编号 116.19457
-    code = Field() # 代码
-    name = Field() # 名称
     market = Field() # 市场代码
+    stock_code = Field() # 股票代码 港股116
+    stock_name = Field() # 股票名称
 
 # 港股行情
 class HkQuotItem(scrapy.Item):
