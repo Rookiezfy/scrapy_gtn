@@ -38,7 +38,7 @@ class HkStockSpider(scrapy.Spider):
             password=config.get_db_passwd(),
             charset=config.get_db_charset())
         cursor = connection.cursor()
-        cursor.execute('select secid,market,stock_code,stock_name from hk_stock')
+        cursor.execute('select secid,market,stock_code,stock_name from hk_hs_stock_list where market = "116" limit 1 ')
         hk_stocks = cursor.fetchall()
 
         # k线频度 日 周 月
