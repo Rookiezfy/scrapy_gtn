@@ -11,7 +11,7 @@ from ..items import HkStockItem
 import scrapy_gtn.conf.config as config
 import logging as log
 
-log.basicConfig(level=log.INFO,format=config.get_log_format(),datefmt=config.get_log_datefmt(),
+log.basicConfig(level=log.WARNING,format=config.get_log_format(),datefmt=config.get_log_datefmt(),
                 handlers={log.FileHandler(filename=root_dir + '/hk_stock.log', mode='a', encoding='utf-8'),
                           log.StreamHandler(sys.stderr)})
 

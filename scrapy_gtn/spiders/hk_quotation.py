@@ -14,7 +14,7 @@ import pymysql
 import datetime
 from dateutil.relativedelta import relativedelta
 
-log.basicConfig(level=log.INFO,format=config.get_log_format(),datefmt=config.get_log_datefmt(),
+log.basicConfig(level=log.WARNING,format=config.get_log_format(),datefmt=config.get_log_datefmt(),
                 handlers={log.FileHandler(filename=root_dir + '/hk_quotation.log', mode='a', encoding='utf-8'),
                           log.StreamHandler(sys.stderr)})
 
@@ -73,7 +73,7 @@ class HkStockSpider(scrapy.Spider):
            stock_code = response.meta['stock_code']
            secid = response.meta['secid']
            freq = response.meta['klt']
-           if (freq != '101'):
+           if (freq != '101' and len(res)>0):
                res.pop()  # 去除最后一天的数据，防止日k 周k出现多余数据
            for one in res:
                item = HkQuotItem()
