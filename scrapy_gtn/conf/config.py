@@ -20,7 +20,7 @@ class GlobalVar:
 
     db_passwd = '123456'
 
-    db_dbname = 'tushare'
+    db_dbname = 'scrapy'
 
     db_charset = 'utf8'
 

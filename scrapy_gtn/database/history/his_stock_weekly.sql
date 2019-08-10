@@ -1,4 +1,4 @@
-CREATE TABLE `stock_weekly` (
+CREATE TABLE `his_stock_weekly` (
   `ts_code` varchar(255) DEFAULT NULL COMMENT '股票代码',
   `trade_date` varchar(255) DEFAULT NULL COMMENT '交易日期',
   `open` decimal(40,2) DEFAULT NULL COMMENT '开盘价',
@@ -10,4 +10,4 @@ CREATE TABLE `stock_weekly` (
   `pct_chg` decimal(40,2) DEFAULT NULL COMMENT '涨跌幅(复权)',
   `vol` decimal(40,2) DEFAULT NULL COMMENT '成交量(手)',
   `amount` decimal(40,2) DEFAULT NULL COMMENT '成交额(千元)'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='周线行情';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='周线行情(tushare)';

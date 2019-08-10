@@ -7,7 +7,7 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(os.path.dirname(__fil
 sys.path.append(root_dir)
 import scrapy
 import json
-from ..items import HkQuotItem
+from ..items import QuotItem
 import scrapy_gtn.conf.config as config
 import logging as log
 import pymysql
@@ -38,7 +38,7 @@ class HkStockSpider(scrapy.Spider):
             password=config.get_db_passwd(),
             charset=config.get_db_charset())
         cursor = connection.cursor()
-        cursor.execute('select secid,market,stock_code,stock_name from hk_hs_stock_list where market = "116" limit 1 ')
+        cursor.execute('select secid,market,stock_code,stock_name from hk_hs_stock_list where market = "116" ')
         hk_stocks = cursor.fetchall()
 
         # k线频度 日 周 月
@@ -53,6 +53,7 @@ class HkStockSpider(scrapy.Spider):
                 meta = {'secid':hk_stock[0],
                         'market':hk_stock[1],
                         'stock_code': hk_stock[2],
+                        'stock_name': hk_stock[3],
                         'klt': freq}
                 params = {'secid':hk_stock[0],
                           'fields1':'f1,f2,f3,f4,f5',
@@ -71,13 +72,17 @@ class HkStockSpider(scrapy.Spider):
            res = data['klines']
            market = response.meta['market']
            stock_code = response.meta['stock_code']
+           stock_name = response.meta['stock_name']
            secid = response.meta['secid']
            freq = response.meta['klt']
            if (freq != '101' and len(res)>0):
                res.pop()  # 去除最后一天的数据，防止日k 周k出现多余数据
            for one in res:
-               item = HkQuotItem()
+               item = QuotItem()
+               item['secid'] = secid
+               item['market'] = market
                item['stock_code'] = stock_code
+               item['stock_name'] = stock_name
                item['trade_date'] = str(one).split(',')[0]
                item['open_px'] = str(one).split(',')[1]
                item['high_px'] = str(one).split(',')[3]
@@ -86,6 +91,4 @@ class HkStockSpider(scrapy.Spider):
                item['business_amount'] = str(one).split(',')[5]
                item['business_balance'] = str(one).split(',')[6]
                item['freq'] = freq
-               item['secid'] = secid
-               item['market'] = market
                yield item

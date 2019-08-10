@@ -18,16 +18,19 @@ class ScrapyGtnItem(scrapy.Item):
     original = Field()
     author = Field()
 
-# 港股股票信息
+# 沪深A股、港股股票信息
 class StockItem(scrapy.Item):
-    secid = Field() # 股票代码 市场代码+编号 116.19457
+    secid = Field() # 股票代码
     market = Field() # 市场代码
-    stock_code = Field() # 股票代码 港股116
+    stock_code = Field() # 股票代码
     stock_name = Field() # 股票名称
 
-# 港股行情
-class HkQuotItem(scrapy.Item):
+# 港股、沪深A股行情
+class QuotItem(scrapy.Item):
+    secid = Field()  # 用于从接口查询的代码，市场代码.股票代码
+    market = Field()  # 市场代码
     stock_code = Field() #股票代码
+    stock_name = Field() #股票名称
     trade_date = Field()  #交易日期
     open_px = Field()  #开盘价
     high_px = Field()  #最高价
@@ -36,5 +39,4 @@ class HkQuotItem(scrapy.Item):
     business_amount = Field()  #成交量
     business_balance = Field()  #成交额(元)
     freq = Field()  #频度
-    secid =Field() #用于从接口查询的代码，市场代码.股票代码
-    market = Field() #市场代码
+

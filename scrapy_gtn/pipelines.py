@@ -45,42 +45,25 @@ class HkStockPipeline(object):
             cursor.execute(sql, lis)
 
         # 港股行情
-        if isinstance(item, items.HkQuotItem):
+        if isinstance(item, items.QuotItem):
             table_name = ''
             # 日k
             if(item['freq'] == '101'):
-                table_name = 'hk_stock_daily'
+                table_name = 'rt_stock_daily'
             # 周k
             if(item['freq'] == '102'):
-                table_name = 'hk_stock_weekly'
+                table_name = 'rt_stock_weekly'
             # 月k
             if(item['freq'] == '103'):
-                table_name = 'hk_stock_monthly'
+                table_name = 'rt_stock_monthly'
 
-            sql = 'insert into ' + table_name + '(stock_code,' \
-                                                'trade_date,' \
-                                                'open_px,' \
-                                                'high_px,' \
-                                                'low_px,' \
-                                                'close_px,' \
-                                                'business_amount,' \
-                                                'business_balance,' \
-                                                'secid,' \
-                                                'market) VALUES ' \
-                                                '(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)' \
-                  ' on duplicate key update open_px = %s,' \
-                                                'high_px = %s,' \
-                                                'low_px = %s,' \
-                                                'close_px = %s,' \
-                                                'business_amount = %s,' \
-                                                'business_balance = %s,' \
-                                                'secid = %s,' \
-                                                'market = %s,' \
-                                                'last_upd_time = %s'
-            lis = (item['stock_code'], item['trade_date'],item['open_px'], item['high_px'], item['low_px'], item['close_px'], item['business_amount'],
-                   item['business_balance'],item['secid'],item['market'],
-                   item['open_px'], item['high_px'], item['low_px'], item['close_px'], item['business_amount'],
-                   item['business_balance'],item['secid'],item['market'],datetime.datetime.now())
+            sql = 'insert into ' + table_name + '(secid,market,stock_code,stock_name,trade_date,open_px,high_px,low_px,close_px,business_amount,business_balance) ' \
+                                                'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ' \
+                                                'on duplicate key update market = %s,stock_code = %s,stock_name = %s,open_px = %s,high_px = %s,low_px = %s,close_px = %s,business_amount = %s,business_balance = %s,last_upd_time = %s'
+            lis = (item['secid'],item['market'],item['stock_code'],item['stock_name'], item['trade_date'],item['open_px'], item['high_px'], item['low_px'], item['close_px'],
+                   item['business_amount'],item['business_balance'],
+                   item['market'],item['stock_code'],item['stock_name'],item['open_px'], item['high_px'], item['low_px'], item['close_px'],
+                   item['business_amount'],item['business_balance'],datetime.datetime.now())
             cursor.execute(sql, lis)
 
     def handle_error(self, failure):

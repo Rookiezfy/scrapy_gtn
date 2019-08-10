@@ -15,8 +15,8 @@ log.basicConfig(level=log.WARNING,format=config.get_log_format(),datefmt=config.
                 handlers={log.FileHandler(filename=root_dir + '/hk_stock.log', mode='a', encoding='utf-8'),
                           log.StreamHandler(sys.stderr)})
 
-class HkHsStockSpider(scrapy.Spider):
-    name = 'hk_hs_stock_list'
+class HkHsStocksSpider(scrapy.Spider):
+    name = 'hk_hs_stocks'
 
     def start_requests(self):
         start_url = 'http://52.push2.eastmoney.com/api/qt/clist/get/'
