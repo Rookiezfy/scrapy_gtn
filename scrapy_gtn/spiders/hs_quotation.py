@@ -33,7 +33,7 @@ class HsQuotationSpider(scrapy.Spider):
             password=config.get_db_passwd(),
             charset=config.get_db_charset())
         cursor = connection.cursor()
-        cursor.execute('select secid,market,stock_code,stock_name from hk_hs_stock_list where (market = "0" or market = "1") and stock_code = "600570" ')
+        cursor.execute('select secid,market,stock_code,stock_name from hk_hs_stock_list where (market = "0" or market = "1") ')
         hs_stocks = cursor.fetchall()
 
         # k线频度及对应接口参数
