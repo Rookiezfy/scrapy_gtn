@@ -11,7 +11,9 @@ import scrapy_gtn.conf.config as config
 import json
 from ..items import QuotItem
 
-
+log.basicConfig(level=log.WARNING,format=config.get_log_format(),datefmt=config.get_log_datefmt(),
+                handlers={log.FileHandler(filename=root_dir + '/hs_quotation_all.log', mode='a', encoding='utf-8'),
+                          log.StreamHandler(sys.stderr)})
 # 从东财爬取沪深A股行情-全量爬取，初始化时执行一次即可，后续使用增量爬虫
 class HsQuotationAllSpider(scrapy.Spider):
     name = 'hs_quotation_all'

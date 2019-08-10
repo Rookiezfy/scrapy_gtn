@@ -12,6 +12,9 @@ import json
 from ..items import QuotItem
 import datetime
 
+log.basicConfig(level=log.WARNING,format=config.get_log_format(),datefmt=config.get_log_datefmt(),
+                handlers={log.FileHandler(filename=root_dir + '/hs_quotation.log', mode='a', encoding='utf-8'),
+                          log.StreamHandler(sys.stderr)})
 
 # 从东财爬取沪深A股行情-增量爬取，每日执行
 class HsQuotationSpider(scrapy.Spider):
