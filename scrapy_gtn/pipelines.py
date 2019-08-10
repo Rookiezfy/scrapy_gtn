@@ -15,6 +15,7 @@ import scrapy_gtn.conf.config as config
 import logging as log
 import scrapy_gtn.items as items
 import datetime
+import decimal
 
 # 异步机制将数据写入到mysql数据库中
 class HkStockPipeline(object):
@@ -47,23 +48,78 @@ class HkStockPipeline(object):
         # 港股行情
         if isinstance(item, items.QuotItem):
             table_name = ''
+            min_k = False
             # 日k
-            if(item['freq'] == '101'):
+            if(item['freq'] == '101' or item['freq'] == 'k'):
                 table_name = 'rt_stock_daily'
             # 周k
-            if(item['freq'] == '102'):
+            if(item['freq'] == '102' or item['freq'] == 'wk'):
                 table_name = 'rt_stock_weekly'
             # 月k
-            if(item['freq'] == '103'):
+            if(item['freq'] == '103' or item['freq'] == 'mk'):
                 table_name = 'rt_stock_monthly'
+            # 5分钟k
+            if(item['freq'] == 'm5k'):
+                table_name = 'rt_stock_5min'
+                min_k = True
+            # 15分钟k
+            if (item['freq'] == 'm15k'):
+                table_name = 'rt_stock_15min'
+                min_k = True
+            # 30分钟k
+            if (item['freq'] == 'm30k'):
+                table_name = 'rt_stock_30min'
+                min_k = True
+            # 60分钟k
+            if (item['freq'] == 'm60k'):
+                table_name = 'rt_stock_60min'
+                min_k = True
 
-            sql = 'insert into ' + table_name + '(secid,market,stock_code,stock_name,trade_date,open_px,high_px,low_px,close_px,business_amount,business_balance) ' \
+            # 处理东财返回成交量、成交额 数据中以文字表示的数值，包括 万 亿，统一成个位数
+            business_amount = ''
+            if (str(item['business_amount']).find('万') >= 0 ):
+                business_amount = decimal.Decimal(str(item['business_amount']).replace('万','')) * 10000
+            elif (str(item['business_amount']).find('亿') >= 0 ):
+                business_amount = decimal.Decimal(str(item['business_amount']).replace('亿', '')) * 100000000
+            else:
+                business_amount = item['business_amount']
+
+            business_balance = ''
+            if (str(item['business_balance']).find('万') >= 0 ):
+                business_balance = decimal.Decimal(str(item['business_balance']).replace('万','')) * 10000
+            elif (str(item['business_balance']).find('亿') >= 0 ):
+                business_balance = decimal.Decimal(str(item['business_balance']).replace('亿', '')) * 100000000
+            else:
+                business_balance = item['business_balance']
+
+            sql = ''
+            lis = ()
+
+            # 非分钟数据不包括trade_time字段
+            if (min_k == False):
+                sql = 'insert into ' + table_name + '(secid,market,stock_code,stock_name,trade_date,open_px,high_px,low_px,close_px,business_amount,business_balance) ' \
                                                 'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ' \
                                                 'on duplicate key update market = %s,stock_code = %s,stock_name = %s,open_px = %s,high_px = %s,low_px = %s,close_px = %s,business_amount = %s,business_balance = %s,last_upd_time = %s'
-            lis = (item['secid'],item['market'],item['stock_code'],item['stock_name'], item['trade_date'],item['open_px'], item['high_px'], item['low_px'], item['close_px'],
-                   item['business_amount'],item['business_balance'],
-                   item['market'],item['stock_code'],item['stock_name'],item['open_px'], item['high_px'], item['low_px'], item['close_px'],
-                   item['business_amount'],item['business_balance'],datetime.datetime.now())
+
+                lis = (item['secid'], item['market'], item['stock_code'], item['stock_name'], item['trade_date'],
+                       item['open_px'], item['high_px'], item['low_px'], item['close_px'],
+                       business_amount, business_balance,
+                       item['market'], item['stock_code'], item['stock_name'], item['open_px'], item['high_px'],
+                       item['low_px'], item['close_px'],
+                       business_amount, business_balance, datetime.datetime.now())
+
+            else:
+                sql = 'insert into ' + table_name + '(secid,market,stock_code,stock_name,trade_date,trade_time,open_px,high_px,low_px,close_px,business_amount,business_balance) ' \
+                                                    'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ' \
+                                                    'on duplicate key update market = %s,stock_code = %s,stock_name = %s,open_px = %s,high_px = %s,low_px = %s,close_px = %s,business_amount = %s,business_balance = %s,last_upd_time = %s'
+
+                lis = (item['secid'], item['market'], item['stock_code'], item['stock_name'], item['trade_date'],item['trade_time'],
+                       item['open_px'], item['high_px'], item['low_px'], item['close_px'],
+                       business_amount, business_balance,
+                       item['market'], item['stock_code'], item['stock_name'], item['open_px'], item['high_px'],
+                       item['low_px'], item['close_px'],
+                       business_amount, business_balance, datetime.datetime.now())
+
             cursor.execute(sql, lis)
 
     def handle_error(self, failure):

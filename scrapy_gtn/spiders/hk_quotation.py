@@ -17,8 +17,8 @@ from dateutil.relativedelta import relativedelta
 log.basicConfig(level=log.WARNING,format=config.get_log_format(),datefmt=config.get_log_datefmt(),
                 handlers={log.FileHandler(filename=root_dir + '/hk_quotation.log', mode='a', encoding='utf-8'),
                           log.StreamHandler(sys.stderr)})
-
-class HkStockSpider(scrapy.Spider):
+# 从东财爬取港股行情
+class HkQuotationSpider(scrapy.Spider):
     name = 'hk_quotation'
 
     def start_requests(self):
@@ -38,7 +38,7 @@ class HkStockSpider(scrapy.Spider):
             password=config.get_db_passwd(),
             charset=config.get_db_charset())
         cursor = connection.cursor()
-        cursor.execute('select secid,market,stock_code,stock_name from hk_hs_stock_list where market = "116" ')
+        cursor.execute('select secid,market,stock_code,stock_name from hk_hs_stock_list where market = "116" limit 1 ')
         hk_stocks = cursor.fetchall()
 
         # k线频度 日 周 月

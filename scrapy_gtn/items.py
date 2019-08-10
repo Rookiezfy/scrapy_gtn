@@ -32,6 +32,7 @@ class QuotItem(scrapy.Item):
     stock_code = Field() #股票代码
     stock_name = Field() #股票名称
     trade_date = Field()  #交易日期
+    trade_time = Field() #交易时间
     open_px = Field()  #开盘价
     high_px = Field()  #最高价
     low_px = Field()  #最低价
