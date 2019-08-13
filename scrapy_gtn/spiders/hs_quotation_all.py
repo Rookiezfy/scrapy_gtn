@@ -59,15 +59,22 @@ class HsQuotationAllSpider(scrapy.Spider):
                                          meta=meta, formdata=params)
 
     def parse(self, response):
+        market = response.meta['market']
+        stock_code = response.meta['stock_code']
+        stock_name = response.meta['stock_name']
+        secid = response.meta['secid']
+        freq = response.meta['klt']
+
         text = str(response.text).replace("\n", "").replace("\r", "")
         response_str = text[1:len(text)-1]
-        data = json.loads(response_str)['data']
+
+        data = []
+        try:
+            data = json.loads(response_str)['data']
+        except:
+            log.error(secid + '爬取' + stock_code + stock_name + freq + '频度数据出错...')
+
         if (data != None and len(data) > 0):
-            market = response.meta['market']
-            stock_code = response.meta['stock_code']
-            stock_name = response.meta['stock_name']
-            secid = response.meta['secid']
-            freq = response.meta['klt']
             if (freq in ['wk', 'mk']):
                 data.pop()  # 去除最后一天的数据，防止日k 周k出现多余数据
             for one in data:

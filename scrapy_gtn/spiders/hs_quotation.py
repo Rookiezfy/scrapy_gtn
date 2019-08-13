@@ -61,16 +61,22 @@ class HsQuotationSpider(scrapy.Spider):
                                          meta=meta, formdata=params)
 
     def parse(self, response):
+        market = response.meta['market']
+        stock_code = response.meta['stock_code']
+        stock_name = response.meta['stock_name']
+        secid = response.meta['secid']
+        freq = response.meta['klt']
+
         text = str(response.text).replace("\n", "").replace("\r", "")
         response_str = text[1:len(text)-1]
-        data = json.loads(response_str)['data']
-        if (data != None and len(data) > 0):
-            market = response.meta['market']
-            stock_code = response.meta['stock_code']
-            stock_name = response.meta['stock_name']
-            secid = response.meta['secid']
-            freq = response.meta['klt']
 
+        data = []
+        try:
+            data = json.loads(response_str)['data']
+        except:
+            log.error(secid+ '爬取'+stock_code+stock_name+freq+'频度数据出错...')
+
+        if (data != None and len(data) > 0):
             cur_date = datetime.datetime.now().date().strftime('%Y-%m-%d')
 
             # 分钟线和日线 取当天的数据
