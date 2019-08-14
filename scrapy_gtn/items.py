@@ -25,6 +25,12 @@ class StockItem(scrapy.Item):
     stock_code = Field() # 股票代码
     stock_name = Field() # 股票名称
 
+# 美股股票信息
+class USStockItem(scrapy.Item):
+    symbol = Field() # 股票代码
+    market = Field() # 市场
+    stock_name = Field() # 股票名称
+
 # 港股、沪深A股行情
 class QuotItem(scrapy.Item):
     secid = Field()  # 用于从接口查询的代码，市场代码.股票代码
