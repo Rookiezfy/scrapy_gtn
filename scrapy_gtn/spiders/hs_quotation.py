@@ -81,7 +81,7 @@ class HsQuotationSpider(scrapy.Spider):
 
             recently = []
 
-            if (freq in ['wk', 'mk']):#周线和月线 取倒数第二条数据 防止周k 月k出现多余数据
+            if (freq in ['wk', 'mk'] and len(data)>1):#周线和月线 取倒数第二条数据 防止周k 月k出现多余数据
                 data.pop()
                 recently.append(data[len(data)-1])
 

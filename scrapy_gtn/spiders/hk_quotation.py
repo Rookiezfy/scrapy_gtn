@@ -78,7 +78,7 @@ class HkQuotationSpider(scrapy.Spider):
 
            recently = []
 
-           if (freq != '101' and len(res)>0): #周线和月线 取倒数第二条数据 防止周k 月k出现多余数据
+           if (freq != '101' and len(res)>1): #周线和月线 取倒数第二条数据 防止周k 月k出现多余数据
                res.pop()
                recently.append(res[len(res) - 1])
 
