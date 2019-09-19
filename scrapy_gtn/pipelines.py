@@ -51,7 +51,7 @@ class HkStockPipeline(object):
             lis = (item['symbol'], item['market'], item['stock_name'],item['market'], item['stock_name'])
             cursor.execute(sql, lis)
 
-        # 港股行情
+        # 沪深行情 港股行情
         if isinstance(item, items.QuotItem):
             table_name = ''
             min_k = False

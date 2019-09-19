@@ -38,14 +38,14 @@ class HkQuotationSpider(scrapy.Spider):
             password=config.get_db_passwd(),
             charset=config.get_db_charset())
         cursor = connection.cursor()
-        cursor.execute('select secid,market,stock_code,stock_name from hk_hs_stock_list where market = "116" limit 1 ')
+        cursor.execute('select secid,market,stock_code,stock_name from hk_hs_stock_list where market = "116" ')
         hk_stocks = cursor.fetchall()
 
         # k线频度 日 周 月
         freqs = ['101','102','103']
 
         end_date = datetime.datetime.now().date().strftime('%Y%m%d')
-        begin_date = (datetime.datetime.now().date() - relativedelta(months=1) ).strftime('%Y%m%d')
+        begin_date = (datetime.datetime.now().date() - relativedelta(months=1)).strftime('%Y%m%d')
 
         for freq in freqs:
             for hk_stock in hk_stocks:
@@ -75,9 +75,17 @@ class HkQuotationSpider(scrapy.Spider):
            stock_name = response.meta['stock_name']
            secid = response.meta['secid']
            freq = response.meta['klt']
-           if (freq != '101' and len(res)>0):
-               res.pop()  # 去除最后一天的数据，防止日k 周k出现多余数据
-           for one in res:
+
+           recently = []
+
+           if (freq != '101' and len(res)>0): #周线和月线 取倒数第二条数据 防止周k 月k出现多余数据
+               res.pop()
+               recently.append(res[len(res) - 1])
+
+           if (freq == '101' and len(res)>0): #日线 取倒数第一条数据
+               recently.append(res[len(res) - 1])
+
+           for one in recently:
                item = QuotItem()
                item['secid'] = secid
                item['market'] = market

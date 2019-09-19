@@ -79,14 +79,13 @@ class HsQuotationSpider(scrapy.Spider):
         if (data != None and len(data) > 0):
             cur_date = datetime.datetime.now().date().strftime('%Y-%m-%d')
 
-            # 分钟线和日线 取当天的数据
-            # 周线和月线 取倒数第二条数据 防止日k 周k出现多余数据
             recently = []
-            if (freq in ['wk', 'mk']):
+
+            if (freq in ['wk', 'mk']):#周线和月线 取倒数第二条数据 防止周k 月k出现多余数据
                 data.pop()
                 recently.append(data[len(data)-1])
 
-            else:
+            else:#分钟线和日线 取当天数据
                 for one in data:
                     if (str(one).split(',')[0].find(cur_date) >= 0):
                         recently.append(one)
