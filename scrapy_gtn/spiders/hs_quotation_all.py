@@ -75,7 +75,7 @@ class HsQuotationAllSpider(scrapy.Spider):
             log.error(secid + '爬取' + stock_code + stock_name + freq + '频度数据出错...')
 
         if (data != None and len(data) > 0):
-            if (freq in ['wk', 'mk']):
+            if (freq in ['wk', 'mk'] and len(data)>1):
                 data.pop()  # 去除最后一天的数据，防止日k 周k出现多余数据
             for one in data:
                 item = QuotItem()
